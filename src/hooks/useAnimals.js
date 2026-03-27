@@ -8,7 +8,7 @@ export function useAnimals() {
   useEffect(() => {
     const loadAnimals = async () => {
       try {
-        const response = await fetch('/animals.csv');
+        const response = await fetch(`${import.meta.env.BASE_URL}animals.csv`);
         if (!response.ok) throw new Error('CSV not found');
         
         const text = await response.text();
