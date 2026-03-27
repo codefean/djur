@@ -1,0 +1,157 @@
+name,english,emoji,xp,rarity,description,category
+Gråsparv,House Sparrow,🐦,10,common,"Small brown bird with grey cap, seen in parks and gardens year-round",bird
+Stadsduva,Feral Pigeon,🕊️,8,common,"Grey urban bird with iridescent neck feathers, common in city squares",bird
+Gråtrut,Herring Gull,🦅,12,common,"Large grey and white gull with yellow bill, loud calls near water",bird
+Gräsand,Mallard,🦆,10,common,"Green-headed duck (male) with blue wing patches, found in all waterways",bird
+Knölsvan,Mute Swan,🦢,18,common,"Elegant white waterbird with orange bill, graceful on Stockholm's lakes",bird
+Blåmes,Eurasian Blue Tit,🐦,12,common,"Tiny bird with blue cap and yellow breast, acrobatic feeder",bird
+Talgoxe,Great Tit,🐦,12,common,"Bold black and white bird with yellow belly, frequent garden visitor",bird
+Skata,Eurasian Magpie,🐦,14,common,"Black and white bird with long tail, intelligent and curious",bird
+Kråka,Hooded Crow,🐦,12,common,"Grey and black crow, clever scavenger in urban and rural areas",bird
+Koltrast,Common Blackbird,🐦,10,common,"Black bird with yellow bill (male), melodious evening singer",bird
+Ringduva,Common Wood Pigeon,🕊️,10,common,"Large grey dove with white neck patch, cooing in parks",bird
+Bofink,Common Chaffinch,🐦,11,common,Colorful finch with pink breast and white wing bars,bird
+Stjärtmes,Long-tailed Tit,🐦,13,common,"Tiny fluffy bird with very long tail, travels in chattering flocks",bird
+Svala,Barn Swallow,🐦,14,common,"Sleek bird with forked tail, catches insects in flight during summer",bird
+Gråhäger,Grey Heron,🦆,16,common,"Tall grey wading bird with long neck, patient fish hunter",bird
+Fiskmås,Common Gull,🦅,11,common,"Medium-sized gull with greenish legs, common near water and cities",bird
+Ekorre,Red Squirrel,🐿️,15,common,"Rusty-red rodent with ear tufts, agile tree climber in parks and forests",mammal
+Vanlig groda,Common Frog,🐸,12,common,"Brown spotted frog, found in ponds and wetlands throughout Stockholm",amphibian
+Åkergroda,Moor Frog,🐸,14,common,"Small frog that turns blue during breeding, prefers marshes and meadows",amphibian
+Vanlig padda,Common Toad,🐸,15,common,"Warty brown amphibian, comes to water to breed in spring",amphibian
+Nässelfjäril,Small Tortoiseshell,🦋,8,common,"Orange butterfly with black and blue markings, feeds on nettles as caterpillar",invertebrate
+Skogsmyra,Wood Ant,🐜,5,common,"Red and black ant building large mounds in forests, important decomposer",invertebrate
+Dagpåfågelöga,Peacock Butterfly,🦋,9,common,"Striking butterfly with eye-spots on wings, hibernates as adult",invertebrate
+Tistelfjäril,Painted Lady,🦋,9,common,Orange-brown migrant butterfly with black and white markings,invertebrate
+Citronfjäril,Brimstone Butterfly,🦋,10,common,"Lemon-yellow butterfly, one of the first to appear in spring",invertebrate
+Parksnigel,Garden Snail,🐌,6,common,"Brown snail with spiral shell, active in gardens after rain",invertebrate
+Daggmask,Earthworm,🪱,4,common,"Pink segmented worm, vital for soil health and composting",invertebrate
+Honungsbi,Honey Bee,🐝,7,common,Fuzzy yellow and black bee that produces honey and pollinates flowers,invertebrate
+Humla,Bumblebee,🐝,8,common,"Large fuzzy bee with loud buzz, important early-season pollinator",invertebrate
+Jordhumla,Buff-tailed Bumblebee,🐝,8,common,Common bumblebee with pale yellow stripes and buff-colored tail,invertebrate
+Flygekorre,Siberian Flying Squirrel,🐿️,85,uncommon,"Nocturnal squirrel with gliding membrane, rare protected species in old forests",mammal
+Rådjur,Roe Deer,🦌,50,uncommon,"Small graceful deer with white rump, seen at forest edges and fields",mammal
+Fälthare,European Hare,🐰,45,uncommon,"Large rabbit with long ears and powerful legs, prefers open farmland",mammal
+Igelkott,European Hedgehog,🦔,55,uncommon,"Spiny nocturnal insectivore, hibernates in winter under leaf piles",mammal
+Grävling,European Badger,🦡,65,uncommon,Nocturnal black and white striped mammal living in underground setts,mammal
+Mink,American Mink,🦦,58,uncommon,"Dark semi-aquatic predator, invasive species along waterways",mammal
+Sork,Field Vole,🐭,35,uncommon,"Small brown rodent with short tail, lives in grasslands and meadows",mammal
+Åkermus,Wood Mouse,🐭,32,uncommon,"Large-eared mouse with long tail, common in woods and gardens",mammal
+Hasselmus,Hazel Dormouse,🐭,48,uncommon,"Tiny golden mouse with fluffy tail, sleeps most of the year",mammal
+Större hackspett,Great Spotted Woodpecker,🪶,50,uncommon,"Black and white woodpecker with red under-tail, drums on trees in spring",bird
+Mindre hackspett,Lesser Spotted Woodpecker,🪶,52,uncommon,"Sparrow-sized woodpecker with barred wings, quiet and hard to spot",bird
+Gröngöling,European Green Woodpecker,🪶,54,uncommon,"Green woodpecker with red cap, laughing call and feeds on ground ants",bird
+Nötväcka,Eurasian Nuthatch,🐦,42,uncommon,"Blue-grey bird that climbs trees head-first, cracks nuts with bill",bird
+Trädkrypare,Eurasian Treecreeper,🐦,40,uncommon,Small brown bird with curved bill that spirals up tree trunks,bird
+Domherre,Eurasian Bullfinch,🐦,44,uncommon,"Plump finch with rosy-red breast and black cap, soft whistling call",bird
+Stenknäck,Hawfinch,🐦,46,uncommon,Stocky finch with massive bill for cracking cherry stones,bird
+Göktyta,Eurasian Wryneck,🐦,48,uncommon,"Cryptic brown woodpecker that twists its neck, eats ants",bird
+Entita,Common Redpoll,🐦,38,uncommon,"Small streaky finch with red forehead, visits birch and alder trees",bird
+Gråsiska,Common Siskin,🐦,39,uncommon,"Yellow-green finch with black cap, feeds acrobatically on seeds",bird
+Grönsiska,Eurasian Siskin,🐦,40,uncommon,"Streaky yellow finch, often in flocks feeding on conifer seeds",bird
+Sädesärla,White Wagtail,🐦,36,uncommon,Black and white bird with long tail that constantly bobs up and down,bird
+Trädpiplärka,Tree Pipit,🐦,37,uncommon,Streaky brown bird with melodious song flight over forest edges,bird
+Rödstjärt,Common Redstart,🐦,41,uncommon,Small bird with quivering orange-red tail and grey back,bird
+Svarthätta,Eurasian Blackcap,🐦,43,uncommon,"Grey warbler with black (male) or brown (female) cap, beautiful singer",bird
+Törnskata,Red-backed Shrike,🐦,47,uncommon,"Small predatory bird that impales prey on thorns, grey head and pink breast",bird
+Varfågel,Northern Shrike,🐦,49,uncommon,"Grey predator with black mask, hunts small birds and rodents",bird
+Bergfink,Brambling,🐦,38,uncommon,"Orange-breasted finch, winter visitor from northern forests",bird
+Kattuggla,Tawny Owl,🦉,65,uncommon,"Brown owl with dark eyes, classic 'hoot-hoot' call in forests and parks",bird
+Sparvuggla,Eurasian Pygmy Owl,🦉,68,uncommon,"Tiny fierce owl, active during day hunting small birds in conifer forests",bird
+Pärluggla,Tengmalm's Owl,🦉,70,uncommon,"Small owl with large head, hunts voles in old forests with woodpecker holes",bird
+Snok,Grass Snake,🐍,60,uncommon,"Non-venomous olive snake with yellow collar, excellent swimmer near water",reptile
+Skogsödla,Viviparous Lizard,🦎,55,uncommon,"Small brown lizard that gives birth to live young, basks on sunny spots",reptile
+Mindre vattensalamander,Smooth Newt,🦎,65,uncommon,"Small orange-bellied amphibian, males have wavy crest during breeding",amphibian
+Abborre,European Perch,🐟,40,uncommon,"Striped fish with spiny dorsal fin, popular among anglers in lakes",fish
+Mört,Roach,🐟,35,uncommon,"Silvery fish with red fins, forms large schools in slow waters",fish
+Braxen,Common Bream,🐟,38,uncommon,"Deep-bodied bronze fish, bottom feeder in lakes and slow rivers",fish
+Björkna,Silver Bream,🐟,36,uncommon,"Small silvery cousin of bream, prefers weedy shallow waters",fish
+Sarv,Ruffe,🐟,34,uncommon,"Small spiny fish with mottled pattern, tolerates poor water quality",fish
+Sutare,Ide,🐟,42,uncommon,"Silvery fish with orange fins, often seen in schools near surface",fish
+Löja,Bleak,🐟,33,uncommon,"Small slender fish that jumps for insects, important prey species",fish
+Elritsa,Stone Loach,🐟,37,uncommon,"Bottom-dwelling fish with barbels, hides under stones in streams",fish
+Sandkrypare,Sand Goby,🐟,31,uncommon,Small coastal fish living on sandy bottoms in the archipelago,fish
+Räv,Red Fox,🦊,120,rare,"Orange-red predator with bushy white-tipped tail, adaptable urban hunter",mammal
+Vildsvin,Wild Boar,🐗,130,rare,"Large pig-like animal with tusks, increasingly common in Stockholm forests",mammal
+Älg,Moose,🦌,150,rare,"Massive deer with palmate antlers, largest land mammal in Sweden",mammal
+Utter,European Otter,🦦,180,rare,"Sleek aquatic mammal with webbed feet, indicator of clean waterways",mammal
+Mård,European Pine Marten,🦡,125,rare,Cat-sized tree-dwelling predator with yellow throat patch,mammal
+Hermelin,Stoat,🦡,115,rare,"Small fierce weasel that turns white in winter, hunts rabbits",mammal
+Vessla,Least Weasel,🦡,110,rare,"World's smallest carnivore, lightning-fast mouse hunter",mammal
+Bäver,Eurasian Beaver,🦫,145,rare,"Large rodent that builds dams and lodges, ecosystem engineer",mammal
+Havsörn,White-tailed Eagle,🦅,160,rare,"Massive eagle with 2.4m wingspan, feeds on fish in the archipelago",bird
+Bivråk,European Honey Buzzard,🦅,135,rare,Raptor that specializes in raiding wasp and bee nests for larvae,bird
+Ormvråk,Common Buzzard,🦅,132,rare,"Medium-sized brown raptor with broad wings, often seen soaring",bird
+Duvhök,Northern Goshawk,🦅,142,rare,"Powerful forest hawk with red eyes, ambush predator of birds",bird
+Sparvhök,Eurasian Sparrowhawk,🦅,128,rare,Small agile hawk that hunts songbirds through dense vegetation,bird
+Fiskgjuse,Osprey,🦅,155,rare,"Fish-eating raptor that plunges feet-first into water, migrates to Africa",bird
+Tornfalk,Common Kestrel,🦅,122,rare,Small falcon that hovers while hunting voles in open areas,bird
+Lärkfalk,Merlin,🦅,138,rare,"Compact falcon that pursues small birds in low, fast flight",bird
+Pilgrimsfalk,Peregrine Falcon,🦅,165,rare,World's fastest bird reaching 300 km/h in hunting dives,bird
+Tjäder,Western Capercaillie,🦃,148,rare,"Turkey-sized black grouse, males display with bubbling song in forest",bird
+Orre,Black Grouse,🦃,140,rare,"Black bird with white tail and red eyebrows, leks in spring",bird
+Järpe,Hazel Grouse,🦃,135,rare,"Small grey woodland grouse, extremely shy and well-camouflaged",bird
+Trana,Common Crane,🦢,158,rare,"Tall grey bird with red crown patch, trumpeting calls during migration",bird
+Storspov,Eurasian Curlew,🐦,118,rare,Large wader with long curved bill and haunting bubbling call,bird
+Ängspiplärka,Meadow Pipit,🐦,95,rare,"Streaky brown bird of open country, song flight display in summer",bird
+Kungsfiskare,Common Kingfisher,🐦,125,rare,"Electric blue and orange bird that dives for fish, prefers clear streams",bird
+Mindre flugsnappare,Red-breasted Flycatcher,🐦,108,rare,"Small flycatcher with orange throat, catches insects in flight",bird
+Grå flugsnappare,Spotted Flycatcher,🐦,105,rare,Grey-brown bird that sallies from perches to catch flying insects,bird
+Trastsångare,Icterine Warbler,🐦,112,rare,Yellow-green warbler with varied mimicking song in leafy trees,bird
+Grönsångare,Wood Warbler,🐦,110,rare,"Bright yellow warbler with trilling song, nests on forest floor",bird
+Lundsångare,Willow Warbler,🐦,102,rare,"Small greenish warbler with sweet descending song, very common migrant",bird
+Näktergal,Thrush Nightingale,🐦,145,rare,Brown warbler famous for powerful nighttime singing in May,bird
+Steglits,European Goldfinch,🐦,98,rare,"Colorful finch with red face and yellow wing bars, feeds on thistle seeds",bird
+Korsnäbb,Common Crossbill,🐦,115,rare,Red finch with crossed bill tips for extracting conifer seeds,bird
+Tallbit,Coal Tit,🐦,92,rare,"Small grey tit with white neck patch, prefers coniferous forests",bird
+Tofsmes,Crested Tit,🐦,96,rare,"Tit with distinctive pointed crest, resident of pine forests",bird
+Svartmes,Marsh Tit,🐦,94,rare,"Plain brown and white tit, difficult to distinguish from willow tit",bird
+Entita,Common Redpoll,🐦,88,rare,"Streaky finch with red forehead, acrobatic feeder on birch seeds",bird
+Huggorm,European Adder,🐍,140,rare,"Sweden's only venomous snake with zigzag pattern, bites rarely dangerous",reptile
+Större vattensalamander,Great Crested Newt,🦎,180,rare,Large protected newt with warty skin and jagged crest during breeding,amphibian
+Gädda,Northern Pike,🐟,100,rare,"Ambush predator with sharp teeth, torpedo-shaped body in weedy waters",fish
+Öring,Brown Trout,🐟,120,rare,"Spotted salmonid of cold streams, both resident and sea-migrating forms",fish
+Lax,Atlantic Salmon,🐟,135,rare,"Silvery migratory fish that returns to rivers to spawn, culturally important",fish
+Sik,European Whitefish,🐟,105,rare,"Silvery fish with small mouth, lives in deep clear lakes",fish
+Lake,Burbot,🐟,115,rare,"Only freshwater cod, spawns under ice in midwinter",fish
+Ål,European Eel,🐟,125,rare,"Snake-like fish that migrates to Sargasso Sea to spawn, critically endangered",fish
+Gös,Zander,🐟,110,rare,Pike-perch with large eyes for hunting in murky water at dusk,fish
+Asp,Asp,🐟,95,rare,Silvery predatory fish that leaps to catch insects and small fish,fish
+Ruda,Crucian Carp,🐟,88,rare,Deep-bodied golden fish that survives in oxygen-poor waters,fish
+Karp,Common Carp,🐟,92,rare,"Large bottom-feeding fish with barbels, introduced species",fish
+Sutare,Ide,🐟,85,rare,"Silvery schooling fish with reddish fins, popular among anglers",fish
+Storspigg,Three-spined Stickleback,🐟,72,rare,"Tiny fish with spines, males build nests and guard eggs",fish
+Lo,Eurasian Lynx,🐈,300,legendary,"Elusive cat with ear tufts and spotted coat, apex predator in deep forests",mammal
+Varg,Gray Wolf,🐺,350,legendary,Pack-hunting canid making slow comeback to Swedish wilderness,mammal
+Järv,Wolverine,🦡,320,legendary,"Powerful solitary mustelid, incredibly rare in southern Sweden",mammal
+Brunbjörn,Brown Bear,🐻,400,legendary,"Largest predator, extremely rare visitor from northern forests",mammal
+Kungsörn,Golden Eagle,🦅,280,legendary,"Majestic raptor with 2m wingspan, hunts hares and grouse in mountains",bird
+Fiskgjuse,Osprey,🦅,240,legendary,"Specialized fish-hawk with reversible outer toe, spectacular dives",bird
+Berguv,Eurasian Eagle-Owl,🦉,290,legendary,"Europe's largest owl with orange eyes, hunts foxes and hares at night",bird
+Lappuggla,Great Grey Owl,🦉,270,legendary,Phantom of northern forests with facial disc and piercing yellow eyes,bird
+Slaguggla,Ural Owl,🦉,260,legendary,"Large pale owl of old-growth forests, fiercely defends nest",bird
+Ormvråk,Common Buzzard,🦅,220,legendary,Broad-winged raptor that soars on thermals hunting rodents,bird
+Blå kärrhök,Hen Harrier,🦅,230,legendary,Elegant grey hawk that hunts low over marshes and moorlands,bird
+Gråsäl,Grey Seal,🦭,250,legendary,"Large marine mammal of the archipelago, bulls can weigh 300kg",mammal
+Knubbsäl,Harbor Seal,🦭,245,legendary,Smaller spotted seal that hauls out on skerries and rocks,mammal
+Tumlare,Harbor Porpoise,🐬,285,legendary,Small toothed whale occasionally seen in Stockholm's outer waters,mammal
+Större brunfladdermus,Brown Long-eared Bat,🦇,220,legendary,"Bat with enormous ears, gleans insects from foliage in slow flight",mammal
+Nordfladdermus,Northern Bat,🦇,215,legendary,"Medium-sized bat of forests and parks, roosts in tree cavities",mammal
+Vattenfladdermus,Daubenton's Bat,🦇,210,legendary,Bat that skims low over water catching insects with feet,mammal
+Fransfladdermus,Whiskered Bat,🦇,205,legendary,Small bat with shaggy fur and trawling flight over waterways,mammal
+Skogsfladddermus,Natterer's Bat,🦇,212,legendary,"Bat with fringe of hairs on tail membrane, hunts in woodland",mammal
+Tretåig hackspett,Three-toed Woodpecker,🪶,265,legendary,"Specialized woodpecker of old forests, flakes bark from dead spruces",bird
+Spillkråka,Black Woodpecker,🪶,275,legendary,"Crow-sized black woodpecker with red crown, powerful excavator",bird
+Bergand,Common Goldeneye,🦆,185,legendary,"Diving duck with round white face spot, whistling wings in flight",bird
+Storskrake,Common Merganser,🦆,195,legendary,Large fish-eating duck with saw-toothed bill and shaggy crest,bird
+Smålom,Red-throated Loon,🦆,200,legendary,"Elegant diver with upturned bill, haunting calls on breeding lakes",bird
+Storlom,Great Northern Loon,🦆,235,legendary,Massive diver with striking black and white breeding plumage,bird
+Skedand,Northern Shoveler,🦆,178,legendary,Duck with huge spatulate bill for filter-feeding in shallows,bird
+Vigg,Tufted Duck,🦆,172,legendary,Black diving duck with drooping crest and yellow eye,bird
+Brunand,Common Pochard,🦆,175,legendary,Diving duck with rusty-red head and grey back,bird
+Salskrake,Red-breasted Merganser,🦆,188,legendary,"Spiky-crested fish-eater with red breast band, coastal waters",bird
+Ejder,Common Eider,🦆,192,legendary,"Large sea duck harvested for down, males have green neck",bird
+Alfågel,Long-tailed Duck,🦆,198,legendary,"Small diving duck with extremely long tail, musical yodeling calls",bird
+Sjöorre,Common Scoter,🦆,182,legendary,All-black sea duck that dives for molluscs in coastal waters,bird
+Svärta,Velvet Scoter,🦆,186,legendary,Large black duck with white wing patches visible in flight,bird
+Praktejder,King Eider,🦆,225,legendary,"Arctic duck with orange shield on bill, rare winter visitor",bird
