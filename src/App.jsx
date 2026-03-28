@@ -4,6 +4,7 @@ import { MILESTONES } from './data/animals';
 import { useAnimals } from './hooks/useAnimals';
 import { themes } from './theme';
 import { WeatherBar } from './components/WeatherBar';
+import { playSound, preloadSounds } from './utils/sounds';
 
 export default function App() {
   const [mode, setMode] = useState(() => localStorage.getItem('wildlife-theme') || 'dark');
@@ -22,6 +23,11 @@ export default function App() {
   const [time, setTime] = useState('');
   const [wikiData, setWikiData] = useState(null);
   const [loadingWiki, setLoadingWiki] = useState(false);
+
+  // Preload sounds on component mount
+  useEffect(() => {
+    preloadSounds();
+  }, []);
 
   useEffect(() => {
     const loadData = async () => {
@@ -112,6 +118,10 @@ export default function App() {
 
   const recordSighting = async (animal) => {
     const isNew = !discoveredAnimals.has(animal.name);
+    
+    // Play appropriate sound
+    playSound(isNew ? 'discover' : 'record');
+    
     const sighting = {
       id: Date.now(),
       animal: animal.name,
@@ -354,6 +364,7 @@ export default function App() {
               {f.toUpperCase()}
             </button>
           ))}
+          {/* Temporarily removed rarity filters
           {Object.keys(ANIMALS).map(rarity => (
             <button
               key={rarity}
@@ -374,6 +385,7 @@ export default function App() {
               {rarity.toUpperCase()}
             </button>
           ))}
+          */}
         </div>
 
         {/* Search bar */}
@@ -411,7 +423,10 @@ export default function App() {
             {filtered.map(a => (
               <div
                 key={a.name}
-                onClick={() => setSelectedAnimal(a)}
+                onClick={() => {
+                  playSound('click');
+                  setSelectedAnimal(a);
+                }}
                 style={{
                   background: theme.cardBg,
                   border: `1px solid ${discoveredAnimals.has(a.name) ? theme.cardBorderDiscovered : theme.cardBorder}`,
