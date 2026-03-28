@@ -15,7 +15,6 @@ export function useAnimals() {
         const lines = text.trim().split('\n');
         const headers = lines[0].split(',');
         
-        // Find column indices
         const nameIdx = headers.indexOf('name');
         const englishIdx = headers.indexOf('english');
         const emojiIdx = headers.indexOf('emoji');
@@ -30,7 +29,6 @@ export function useAnimals() {
           const line = lines[i].trim();
           if (!line) continue;
           
-          // Handle CSV with quoted fields (descriptions may contain commas)
           const values = parseCSVLine(line);
           
           const animal = {
@@ -66,7 +64,6 @@ export function useAnimals() {
   return { animals, totalAnimals, source, error };
 }
  
-// Helper function to parse CSV line with quoted fields
 function parseCSVLine(line) {
   const values = [];
   let current = '';
@@ -85,13 +82,11 @@ function parseCSVLine(line) {
     }
   }
   
-  // Push the last value
   values.push(current);
   
   return values;
 }
  
-// Helper function to clean quotes from values
 function cleanQuotes(value) {
   if (!value) return '';
   return value.replace(/^["']|["']$/g, '').trim();

@@ -8,7 +8,7 @@ export const themes = {
     headerBorder:        "#1e2329",
     text:                "#d1e0d5",
     textMuted:           "#8093a0",
-    textDim:             "#3d5248",
+    textDim:             "#658676",
     metaLabel:           "#5a7a6b",
     metaValue:           "#8a9ea0",
     badgeBg:             "#080c0e",

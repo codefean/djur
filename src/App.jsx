@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Sun, Moon, X } from 'lucide-react';
+import { Sun, Moon, X, ExternalLink } from 'lucide-react';
 import { MILESTONES } from './data/animals';
 import { useAnimals } from './hooks/useAnimals';
 import { themes } from './theme';
@@ -20,6 +20,8 @@ export default function App() {
   const [location, setLocation] = useState('');
   const [date, setDate] = useState('');
   const [time, setTime] = useState('');
+  const [wikiData, setWikiData] = useState(null);
+  const [loadingWiki, setLoadingWiki] = useState(false);
 
   useEffect(() => {
     const loadData = async () => {
@@ -38,8 +40,51 @@ export default function App() {
       const now = new Date();
       setDate(now.toISOString().split('T')[0]);
       setTime(now.toTimeString().slice(0, 5));
+      
+      // Fetch Wikipedia data when animal is selected
+      fetchWikipediaData(selectedAnimal.en);
+    } else {
+      setWikiData(null);
     }
   }, [selectedAnimal]);
+
+  const fetchWikipediaData = async (englishName) => {
+    setLoadingWiki(true);
+    setWikiData(null);
+    
+    try {
+      // Search for the article
+      const searchUrl = `https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=${encodeURIComponent(englishName)}&format=json&origin=*`;
+      const searchResponse = await fetch(searchUrl);
+      const searchData = await searchResponse.json();
+      
+      if (searchData.query.search.length === 0) {
+        setLoadingWiki(false);
+        return;
+      }
+      
+      const pageTitle = searchData.query.search[0].title;
+      
+      // Get page info including image
+      const pageUrl = `https://en.wikipedia.org/w/api.php?action=query&titles=${encodeURIComponent(pageTitle)}&prop=pageimages|info&pithumbsize=400&inprop=url&format=json&origin=*`;
+      const pageResponse = await fetch(pageUrl);
+      const pageData = await pageResponse.json();
+      
+      const pages = pageData.query.pages;
+      const pageId = Object.keys(pages)[0];
+      const page = pages[pageId];
+      
+      setWikiData({
+        title: page.title,
+        url: page.fullurl,
+        image: page.thumbnail?.source || null,
+      });
+    } catch (err) {
+      console.error('Failed to fetch Wikipedia data:', err);
+    } finally {
+      setLoadingWiki(false);
+    }
+  };
 
   const toggleMode = () => {
     const newMode = mode === 'dark' ? 'light' : 'dark';
@@ -229,340 +274,253 @@ export default function App() {
         {/* Progress bar */}
         {milestone && (
           <div style={{ marginBottom: 10 }}>
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 4 }}>
-              <div style={{
-                fontSize: 10,
-                fontFamily: "'DM Mono', monospace",
-                color: theme.metaLabel,
-                letterSpacing: "0.05em",
-              }}>
-                {milestone.reward} {milestone.title.toUpperCase()}
-              </div>
-              <div style={{
-                fontSize: 9,
-                fontFamily: "'DM Mono', monospace",
-                color: theme.textDim,
-              }}>
-                {progress}%
-              </div>
+            <div style={{
+              fontSize: 9,
+              color: theme.metaLabel,
+              marginBottom: 4,
+              fontFamily: "'DM Mono', monospace",
+              letterSpacing: "0.06em",
+            }}>
+              MILESTONE: {milestone.title} {milestone.reward}
             </div>
             <div style={{
-              width: "100%",
-              height: 2,
-              background: theme.divider,
-              borderRadius: 1,
+              height: 4,
+              background: theme.progressBg,
+              borderRadius: 2,
+              overflow: "hidden",
             }}>
               <div style={{
-                width: `${progress}%`,
                 height: "100%",
-                background: theme.filterActiveText,
-                transition: "width 0.3s",
+                width: `${progress}%`,
+                background: theme.progressFill,
+                transition: "width 0.3s ease",
               }} />
             </div>
           </div>
         )}
-      </div>
 
-      {/* Main content */}
-      <div style={{ padding: "20px 32px 40px" }}>
-        {/* CSV status */}
-        {error && (
-          <div style={{
-            background: "#fee2e2",
-            border: "1px solid #fca5a5",
-            borderRadius: 4,
-            padding: "8px 14px",
-            marginBottom: 16,
-            fontFamily: "'DM Mono', monospace",
-            fontSize: 11,
-            color: "#7f1d1d",
-            letterSpacing: "0.06em",
-          }}>
-            ⚠ CSV parse error: {error} — showing static data
-          </div>
-        )}
-
-        {/* Search bar */}
-        <div style={{
-          display: "flex",
-          alignItems: "center",
-          gap: 8,
-          marginBottom: 12,
-        }}>
-          <input
-            type="text"
-            placeholder="Search animals..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            style={{
-              flex: 1,
-              padding: "8px 12px",
-              background: theme.searchBg,
-              border: `1px solid ${theme.searchBorder}`,
-              borderRadius: 4,
-              color: theme.text,
-              fontSize: 12,
-              outline: "none",
-            }}
-          />
-          <div style={{
-            fontSize: 10,
-            fontFamily: "'DM Mono', monospace",
-            color: theme.metaLabel,
-            whiteSpace: "nowrap",
-          }}>
-            {filtered.length} / {allAnimals.length}
-          </div>
-        </div>
-
-        {/* Category Filter Pills */}
+        {/* Category filters */}
         <div style={{
           display: "flex",
           gap: 6,
-          marginBottom: 12,
           flexWrap: "wrap",
+          marginBottom: 12,
         }}>
-          {Object.keys(categoryLabels).map(cat => (
+          {Object.entries(categoryLabels).map(([key, { label, emoji }]) => (
             <button
-              key={cat}
-              onClick={() => setCategoryFilter(cat)}
+              key={key}
+              onClick={() => setCategoryFilter(key)}
               style={{
-                background: categoryFilter === cat ? theme.filterActiveBg : theme.filterBg,
-                border: `1px solid ${categoryFilter === cat ? theme.filterActiveBorder : theme.filterBorder}`,
+                padding: "4px 8px",
+                background: categoryFilter === key ? theme.filterActiveBg : theme.filterBg,
+                border: `1px solid ${categoryFilter === key ? theme.filterActiveBorder : theme.filterBorder}`,
                 borderRadius: 4,
-                padding: "5px 10px",
+                color: categoryFilter === key ? theme.filterActiveText : theme.filterText,
+                fontSize: 9,
+                fontWeight: 600,
                 cursor: "pointer",
-                color: categoryFilter === cat ? theme.filterActiveText : theme.filterText,
-                fontSize: 10,
                 fontFamily: "'DM Mono', monospace",
-                fontWeight: categoryFilter === cat ? 600 : 400,
                 letterSpacing: "0.04em",
-                display: "flex",
-                alignItems: "center",
-                gap: 4,
-                transition: "all 0.15s",
               }}
             >
-              <span>{categoryLabels[cat].emoji}</span>
-              <span>{categoryLabels[cat].label.toUpperCase()}</span>
-              <span style={{ 
-                fontSize: 9, 
-                opacity: 0.7,
-                marginLeft: 2,
-              }}>
-                {categoryCounts[cat] || 0}
-              </span>
+              {emoji} {label.toUpperCase()} {categoryCounts[key]}
             </button>
           ))}
         </div>
 
-        {/* Rarity Filter Pills */}
+        {/* Existing filters */}
         <div style={{
           display: "flex",
           gap: 6,
-          marginBottom: 16,
           flexWrap: "wrap",
         }}>
-          {['all', 'discovered', 'undiscovered', 'common', 'uncommon', 'rare', 'legendary'].map(f => (
+          {['all', 'discovered', 'undiscovered'].map(f => (
             <button
               key={f}
               onClick={() => setActiveFilter(f)}
               style={{
+                padding: "4px 8px",
                 background: activeFilter === f ? theme.filterActiveBg : theme.filterBg,
                 border: `1px solid ${activeFilter === f ? theme.filterActiveBorder : theme.filterBorder}`,
                 borderRadius: 4,
-                padding: "5px 10px",
-                cursor: "pointer",
                 color: activeFilter === f ? theme.filterActiveText : theme.filterText,
-                fontSize: 10,
+                fontSize: 9,
+                fontWeight: 600,
+                cursor: "pointer",
                 fontFamily: "'DM Mono', monospace",
-                fontWeight: activeFilter === f ? 600 : 400,
                 letterSpacing: "0.04em",
-                transition: "all 0.15s",
               }}
             >
               {f.toUpperCase()}
             </button>
           ))}
+          {Object.keys(ANIMALS).map(rarity => (
+            <button
+              key={rarity}
+              onClick={() => setActiveFilter(rarity)}
+              style={{
+                padding: "4px 8px",
+                background: activeFilter === rarity ? theme.filterActiveBg : theme.filterBg,
+                border: `1px solid ${activeFilter === rarity ? theme.filterActiveBorder : theme.filterBorder}`,
+                borderRadius: 4,
+                color: activeFilter === rarity ? theme.filterActiveText : theme.filterText,
+                fontSize: 9,
+                fontWeight: 600,
+                cursor: "pointer",
+                fontFamily: "'DM Mono', monospace",
+                letterSpacing: "0.04em",
+              }}
+            >
+              {rarity.toUpperCase()}
+            </button>
+          ))}
         </div>
 
-        {/* Animals grid */}
-        {filtered.length === 0 ? (
-          <div style={{
-            textAlign: "center",
-            color: theme.textDim,
-            fontSize: 13,
-            padding: "60px 20px",
-          }}>
-            <div style={{ fontSize: 40, marginBottom: 12 }}>🔍</div>
-            <div>No animals match your filters</div>
-            <div style={{ fontSize: 11, marginTop: 8, opacity: 0.7 }}>
-              Try adjusting your category or rarity filters
-            </div>
-          </div>
-        ) : (
+        {/* Search bar */}
+        <input
+          type="text"
+          placeholder="Search animals..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          style={{
+            width: "100%",
+            marginTop: 12,
+            padding: "8px 12px",
+            background: theme.searchBg,
+            border: `1px solid ${theme.searchBorder}`,
+            borderRadius: 4,
+            color: theme.text,
+            fontSize: 12,
+          }}
+        />
+      </div>
+
+      <div style={{
+        display: "grid",
+        gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))",
+        gap: 20,
+        padding: "24px 32px",
+      }}>
+        {/* Animal Grid */}
+        <div style={{ gridColumn: "1 / -1" }}>
           <div style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))",
+            gridTemplateColumns: "repeat(auto-fill, minmax(140px, 1fr))",
             gap: 10,
-            marginBottom: 32,
           }}>
-            {filtered.map(a => {
-              const isDiscovered = discoveredAnimals.has(a.name);
-              return (
-                <div
-                  key={a.name}
-                  onClick={() => setSelectedAnimal(a)}
-                  style={{
-                    background: theme.cardBg,
-                    border: `1px solid ${isDiscovered ? theme.discoveredBorder : theme.cardBorder}`,
-                    borderRadius: 6,
-                    padding: "12px 14px",
-                    cursor: "pointer",
-                    transition: "all 0.15s",
-                    opacity: isDiscovered ? 1 : 0.7,
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.transform = "translateY(-1px)";
-                    e.currentTarget.style.boxShadow = `0 4px 12px ${theme.cardShadow}`;
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.transform = "translateY(0)";
-                    e.currentTarget.style.boxShadow = "none";
-                  }}
-                >
-                  <div style={{ display: "flex", alignItems: "flex-start", gap: 10 }}>
-                    <div style={{ 
-                      fontSize: 32,
-                      filter: isDiscovered ? 'none' : 'grayscale(100%) opacity(0.4)',
-                      transition: "filter 0.15s",
-                    }}>
-                      {a.emoji}
-                    </div>
-                    <div style={{ flex: 1, minWidth: 0 }}>
-                      <div style={{
-                        fontSize: 13,
-                        fontWeight: 600,
-                        color: theme.text,
-                        marginBottom: 2,
-                      }}>
-                        {a.name}
-                      </div>
-                      <div style={{
-                        fontSize: 10,
-                        color: theme.textMuted,
-                        marginBottom: 6,
-                        fontFamily: "'DM Mono', monospace",
-                      }}>
-                        {a.en}
-                      </div>
-                      {a.description && (
-                        <div style={{
-                          fontSize: 10,
-                          color: theme.textDim,
-                          lineHeight: 1.4,
-                          marginBottom: 8,
-                        }}>
-                          {a.description}
-                        </div>
-                      )}
-                      <div style={{ display: "flex", gap: 6, alignItems: "center", flexWrap: "wrap" }}>
-                        <span style={{
-                          fontSize: 8,
-                          padding: "2px 6px",
-                          background: theme.badgeBg,
-                          color: theme.badgeText,
-                          borderRadius: 3,
-                          fontFamily: "'DM Mono', monospace",
-                          letterSpacing: "0.05em",
-                        }}>
-                          {a.rarity?.toUpperCase()}
-                        </span>
-                        {a.category && (
-                          <span style={{
-                            fontSize: 8,
-                            padding: "2px 6px",
-                            background: theme.categoryBadgeBg || theme.badgeBg,
-                            color: theme.categoryBadgeText || theme.badgeText,
-                            borderRadius: 3,
-                            fontFamily: "'DM Mono', monospace",
-                            letterSpacing: "0.05em",
-                          }}>
-                            {categoryLabels[a.category]?.emoji} {a.category.toUpperCase()}
-                          </span>
-                        )}
-                        <span style={{
-                          fontSize: 8,
-                          padding: "2px 6px",
-                          color: theme.textDim,
-                          fontFamily: "'DM Mono', monospace",
-                        }}>
-                          +{a.xp} XP
-                        </span>
-                      </div>
-                    </div>
-                  </div>
+            {filtered.map(a => (
+              <div
+                key={a.name}
+                onClick={() => setSelectedAnimal(a)}
+                style={{
+                  background: theme.cardBg,
+                  border: `1px solid ${discoveredAnimals.has(a.name) ? theme.cardBorderDiscovered : theme.cardBorder}`,
+                  borderRadius: 6,
+                  padding: "12px",
+                  cursor: "pointer",
+                  transition: "all 0.15s",
+                  opacity: discoveredAnimals.has(a.name) ? 1 : 0.6,
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = "translateY(-2px)";
+                  e.currentTarget.style.borderColor = theme.cardBorderHover;
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = "translateY(0)";
+                  e.currentTarget.style.borderColor = discoveredAnimals.has(a.name) ? theme.cardBorderDiscovered : theme.cardBorder;
+                }}
+              >
+                <div style={{
+                  fontSize: 32,
+                  marginBottom: 6,
+                  textAlign: "center",
+                  filter: discoveredAnimals.has(a.name) ? "none" : "grayscale(100%)",
+                }}>
+                  {a.emoji}
                 </div>
-              );
-            })}
+                <div style={{
+                  fontSize: 11,
+                  fontWeight: 600,
+                  color: theme.text,
+                  marginBottom: 2,
+                  textAlign: "center",
+                }}>
+                  {a.name}
+                </div>
+                <div style={{
+                  fontSize: 9,
+                  color: theme.textMuted,
+                  fontFamily: "'DM Mono', monospace",
+                  textAlign: "center",
+                  marginBottom: 6,
+                }}>
+                  {a.en}
+                </div>
+                <div style={{
+                  fontSize: 8,
+                  padding: "2px 6px",
+                  background: theme.badgeBg,
+                  color: theme.badgeText,
+                  borderRadius: 3,
+                  fontFamily: "'DM Mono', monospace",
+                  textAlign: "center",
+                }}>
+                  {a.xp} XP
+                </div>
+              </div>
+            ))}
           </div>
-        )}
+        </div>
 
-        {/* Recent sightings */}
+        {/* Sightings log */}
         {sightings.length > 0 && (
-          <div>
+          <div style={{
+            gridColumn: "1 / -1",
+            background: theme.cardBg,
+            border: `1px solid ${theme.cardBorder}`,
+            borderRadius: 6,
+            padding: "16px 20px",
+          }}>
             <div style={{
               fontSize: 11,
               fontWeight: 600,
               color: theme.metaLabel,
-              marginBottom: 10,
+              marginBottom: 12,
               fontFamily: "'DM Mono', monospace",
               letterSpacing: "0.06em",
             }}>
               RECENT SIGHTINGS
             </div>
-            <div style={{
-              display: "flex",
-              flexDirection: "column",
-              gap: 8,
-            }}>
+            <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
               {sightings.slice(0, 10).map(s => (
-                <div
-                  key={s.id}
-                  style={{
-                    background: theme.cardBg,
-                    border: `1px solid ${s.isFirst ? theme.discoveredBorder : theme.cardBorder}`,
-                    borderRadius: 6,
-                    padding: "10px 12px",
-                    display: "flex",
-                    alignItems: "center",
-                    gap: 10,
-                  }}
-                >
-                  <div style={{ fontSize: 20 }}>{s.emoji}</div>
-                  <div style={{ flex: 1, minWidth: 0 }}>
-                    <div style={{ fontSize: 12, fontWeight: 600, color: theme.text }}>
-                      {s.animal}
-                      {s.isFirst && (
-                        <span style={{
+                <div key={s.id} style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  padding: "8px 12px",
+                  background: theme.sightingBg,
+                  borderRadius: 4,
+                  border: s.isFirst ? `1px solid ${theme.filterActiveBorder}` : "none",
+                }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                    <span style={{ fontSize: 20 }}>{s.emoji}</span>
+                    <div>
+                      <div style={{ fontSize: 11, fontWeight: 600, color: theme.text }}>
+                        {s.animal}
+                        {s.isFirst && <span style={{
                           marginLeft: 6,
                           fontSize: 8,
-                          padding: "1px 4px",
-                          background: theme.filterActiveBg,
                           color: theme.filterActiveText,
-                          borderRadius: 2,
                           fontFamily: "'DM Mono', monospace",
-                        }}>
-                          FIRST
-                        </span>
-                      )}
-                    </div>
-                    <div style={{
-                      fontSize: 9,
-                      color: theme.metaLabel,
-                      fontFamily: "'DM Mono', monospace",
-                    }}>
-                      {s.location} · {new Date(s.timestamp).toLocaleDateString('en-SE', { month: 'short', day: 'numeric' })}
+                        }}>⭐ FIRST</span>}
+                      </div>
+                      <div style={{
+                        fontSize: 9,
+                        color: theme.textDim,
+                        fontFamily: "'DM Mono', monospace",
+                      }}>
+                        {s.location} · {new Date(s.timestamp).toLocaleDateString('en-SE', { month: 'short', day: 'numeric' })}
+                      </div>
                     </div>
                   </div>
                   <div style={{
@@ -602,17 +560,20 @@ export default function App() {
           justifyContent: "center",
           padding: 20,
           zIndex: 1000,
+          overflow: "auto",
         }}>
           <div style={{
             background: theme.cardBg,
             border: `1px solid ${theme.cardBorder}`,
             borderRadius: 8,
-            maxWidth: 440,
+            maxWidth: 500,
             width: "100%",
             padding: "20px 24px",
+            maxHeight: "90vh",
+            overflow: "auto",
           }}>
             <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 16 }}>
-              <div>
+              <div style={{ flex: 1 }}>
                 <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 8 }}>
                   <span style={{ fontSize: 36 }}>{selectedAnimal.emoji}</span>
                   <div>
@@ -622,6 +583,42 @@ export default function App() {
                     </div>
                   </div>
                 </div>
+
+                {/* Wikipedia Image */}
+                {loadingWiki && (
+                  <div style={{
+                    width: "100%",
+                    height: 200,
+                    background: theme.searchBg,
+                    borderRadius: 6,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    marginBottom: 12,
+                    fontSize: 11,
+                    color: theme.textMuted,
+                  }}>
+                    Loading image...
+                  </div>
+                )}
+                
+                {!loadingWiki && wikiData?.image && (
+                  <div style={{ marginBottom: 12 }}>
+                    <img
+                      src={wikiData.image}
+                      alt={selectedAnimal.en}
+                      style={{
+                        width: "100%",
+                        height: "auto",
+                        maxHeight: 250,
+                        objectFit: "cover",
+                        borderRadius: 6,
+                        border: `1px solid ${theme.cardBorder}`,
+                      }}
+                    />
+                  </div>
+                )}
+
                 {selectedAnimal.description && (
                   <div style={{
                     fontSize: 11,
@@ -633,7 +630,7 @@ export default function App() {
                     {selectedAnimal.description}
                   </div>
                 )}
-                <div style={{ display: "flex", gap: 6, marginBottom: 6 }}>
+                <div style={{ display: "flex", gap: 6, marginBottom: 6, flexWrap: "wrap" }}>
                   <span style={{
                     fontSize: 9,
                     padding: "3px 7px",
@@ -666,6 +663,33 @@ export default function App() {
                     ⭐ NEW · +{selectedAnimal.xp} XP
                   </div>
                 )}
+
+                {/* Learn More Button */}
+                {wikiData?.url && (
+                  <a
+                    href={wikiData.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: 6,
+                      marginTop: 8,
+                      padding: "6px 12px",
+                      background: theme.toggleBg,
+                      border: `1px solid ${theme.toggleBorder}`,
+                      borderRadius: 4,
+                      color: theme.toggleText,
+                      fontSize: 10,
+                      fontWeight: 600,
+                      fontFamily: "'DM Mono', monospace",
+                      textDecoration: "none",
+                      cursor: "pointer",
+                    }}
+                  >
+                    LEARN MORE <ExternalLink size={12} />
+                  </a>
+                )}
               </div>
               <button onClick={() => setSelectedAnimal(null)} style={{
                 background: "none",
@@ -674,6 +698,7 @@ export default function App() {
                 cursor: "pointer",
                 padding: 0,
                 alignSelf: "flex-start",
+                marginLeft: 12,
               }}>
                 <X size={18} />
               </button>
